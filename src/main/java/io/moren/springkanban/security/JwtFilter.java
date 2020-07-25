@@ -29,7 +29,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         String header = request.getHeader(JwtProperties.HEADER);
 
-        if (header != null || header.startsWith(JwtProperties.PREFIX)) {
+        if (header != null && header.startsWith(JwtProperties.PREFIX)) {
             String username = jwtUtil.getUsername(header);
 
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
