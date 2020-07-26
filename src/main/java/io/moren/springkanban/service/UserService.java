@@ -1,7 +1,6 @@
 package io.moren.springkanban.service;
 
-import io.moren.springkanban.dto.LoginDto;
-import io.moren.springkanban.dto.RegistrationDto;
+import io.moren.springkanban.dto.UserDto;
 import io.moren.springkanban.model.Role;
 import io.moren.springkanban.model.User;
 import io.moren.springkanban.repository.RoleRepository;
@@ -27,22 +26,21 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("Username " + username + " not found"));
     }
 
-    public void save(RegistrationDto registrationDto) {
+    public void save(UserDto userDto) {
 
-        if (userRepository.findByUsername(registrationDto.getUsername()).isPresent()
-                || registrationDto.getUsername() == null) {
+        if (userRepository.findByUsername(userDto.getUsername()).isPresent()
+                || userDto.getUsername() == null) {
             return;
         }
 
         Role roleUser = roleRepository.findByName("ROLE_USER").get();
 
         User user = new User();
-        user.setUsername(registrationDto.getUsername());
-        user.setPassword(registrationDto.getPassword());
+        user.setUsername(userDto.getUsername());
+        user.setPassword(userDto.getPassword());
         user.setRoles(Collections.singleton(roleUser));
 
         userRepository.save(user);
     }
 
-    // update method
 }

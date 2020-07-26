@@ -30,6 +30,7 @@ public class JwtUtil {
                 .parser()
                 .setSigningKey(secret)
                 .parseClaimsJws(
+                        // delete 'Bearer ' from token
                         token.substring(JwtProperties.PREFIX.length())
                 )
                 .getBody()

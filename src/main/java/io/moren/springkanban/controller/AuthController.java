@@ -1,8 +1,7 @@
 package io.moren.springkanban.controller;
 
-import io.moren.springkanban.dto.LoginDto;
-import io.moren.springkanban.dto.RegistrationDto;
 import io.moren.springkanban.dto.TokenDto;
+import io.moren.springkanban.dto.UserDto;
 import io.moren.springkanban.service.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,16 +17,17 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("login")
-    public ResponseEntity<TokenDto> login(@RequestBody LoginDto loginDto) {
-        TokenDto token = authService.login(loginDto);
+    public ResponseEntity<TokenDto> login(@RequestBody UserDto userDto) {
+        TokenDto token = authService.login(userDto);
 
         return ResponseEntity.ok(token);
     }
-
+    
     @PostMapping("signup")
-    public HttpStatus signup(@RequestBody RegistrationDto registrationDto) {
-        authService.signup(registrationDto);
+    public ResponseEntity<TokenDto> signup(@RequestBody UserDto userDto) {
+        authService.signup(userDto);
 
-        return HttpStatus.CREATED;
+        TokenDto token = authService.login(userDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(token);
     }
 }
