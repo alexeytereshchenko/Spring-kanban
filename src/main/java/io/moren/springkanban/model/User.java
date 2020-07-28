@@ -25,10 +25,10 @@ public class User implements UserDetails {
     @NotBlank(message = "Password is required")
     private String password;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Board> boards;
 
     @Override

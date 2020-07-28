@@ -26,15 +26,15 @@ public class JwtUtil {
 
     public String getUsername(String token) {
 
-        return Jwts
-                .parser()
-                .setSigningKey(secret)
-                .parseClaimsJws(
-                        // delete 'Bearer ' from token
-                        token.substring(JwtProperties.PREFIX.length())
-                )
-                .getBody()
-                .getSubject();
+            return Jwts
+                    .parser()
+                    .setSigningKey(secret)
+                    .parseClaimsJws(
+                            // delete 'Bearer ' from token
+                            token.substring(JwtProperties.PREFIX.length())
+                    )
+                    .getBody()
+                    .getSubject();
     }
 
     public boolean resurveToken(String token) {
