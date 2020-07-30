@@ -13,13 +13,13 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/column")
+@RequestMapping("/api/boards/{boardId}/columns")
 public class ColumnController {
 
     private final ColumnService columnService;
 
     @GetMapping
-    public List<ColumnDto> getAll(@RequestParam Long boardId,
+    public List<ColumnDto> getAll(@PathVariable Long boardId,
                                   @AuthenticationPrincipal User user) {
         return columnService.getAll(boardId);
     }

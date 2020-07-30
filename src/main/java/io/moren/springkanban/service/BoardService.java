@@ -25,8 +25,8 @@ public class BoardService {
                 .collect(Collectors.toList());
     }
 
-    public BoardDto get(Long id) {
-        Board board = boardRepository.findById(id).get();
+    public BoardDto get(Long id, User user) {
+        Board board = boardRepository.findByIdAndUser(id, user).get();
         return new BoardDto(board.getId(), board.getName());
     }
 
@@ -40,14 +40,14 @@ public class BoardService {
         return boardDto;
     }
 
-    public void update(BoardDto board, Long id) {
-        boardRepository.findById(id).ifPresent(oldBoard -> {
+    public void update(BoardDto board, Long id, User user) {
+        boardRepository.findByIdAndUser(id, user).ifPresent(oldBoard -> {
             oldBoard.setName(board.getName());
             boardRepository.save(oldBoard);
         });
     }
 
-    public void delete(Long id) {
-        boardRepository.deleteById(id);
+    public void delete(Long id, User user) {
+        boardRepository.deleteByIdAndUser(id, user);
     }
 }

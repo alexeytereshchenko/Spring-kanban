@@ -14,14 +14,14 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/card")
-public class CardCotroller {
+@RequestMapping("/api/boards/{boardId}/columns/{columnId}/cards")
+public class CardController {
 
     private final CardService cardService;
 
     @GetMapping
     public ResponseEntity<List<CardDto>> getAll(@AuthenticationPrincipal User user,
-                                                @RequestParam Long columnId) {
+                                                @PathVariable Long columnId) {
         return ResponseEntity
                 .ok(cardService.getAll(columnId, user));
     }

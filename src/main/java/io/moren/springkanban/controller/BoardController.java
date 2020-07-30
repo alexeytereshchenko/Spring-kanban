@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/board")
+@RequestMapping("/api/boards")
 @AllArgsConstructor
 public class BoardController {
 
@@ -25,8 +25,9 @@ public class BoardController {
     }
 
     @GetMapping("{id}")
-    public BoardDto get(@PathVariable Long id) {
-        return boardService.get(id);
+    public BoardDto get(@PathVariable Long id,
+                        @AuthenticationPrincipal User user) {
+        return boardService.get(id, user);
     }
 
     @PostMapping
@@ -36,14 +37,17 @@ public class BoardController {
     }
 
     @PutMapping("{id}")
-    public HttpStatus update(@RequestBody @Valid BoardDto board, @PathVariable Long id) {
-        boardService.update(board, id);
+    public HttpStatus update(@RequestBody @Valid BoardDto board,
+                             @PathVariable Long id,
+                             @AuthenticationPrincipal User user) {
+        boardService.update(board, id, user);
         return HttpStatus.OK;
     }
 
     @DeleteMapping("{id}")
-    public HttpStatus delete(@PathVariable Long id) {
-        boardService.delete(id);
+    public HttpStatus delete(@PathVariable Long id,
+                             @AuthenticationPrincipal User user) {
+        boardService.delete(id, user);
         return HttpStatus.OK;
     }
 }
