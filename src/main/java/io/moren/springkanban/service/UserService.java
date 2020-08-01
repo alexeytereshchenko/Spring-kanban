@@ -7,24 +7,19 @@ import io.moren.springkanban.repository.RoleRepository;
 import io.moren.springkanban.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 
 @Service
 @AllArgsConstructor
-public class UserService implements UserDetailsService {
+public class UserService {
 
     private RoleRepository roleRepository;
     private UserRepository userRepository;
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Username " + username + " not found"));
-    }
+    private final PasswordEncoder passwordEncoder;
 
     public void save(UserDto userDto) {
 
@@ -37,7 +32,9 @@ public class UserService implements UserDetailsService {
 
         User user = new User();
         user.setUsername(userDto.getUsername());
-        user.setPassword(userDto.getPassword());
+        user.setPassword(
+                passwordEncoder.encode(userDto.getPassword())
+        );
         user.setRoles(Collections.singleton(roleUser));
 
         userRepository.save(user);
