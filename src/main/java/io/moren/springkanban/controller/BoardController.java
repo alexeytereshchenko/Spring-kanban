@@ -6,6 +6,7 @@ import io.moren.springkanban.model.User;
 import io.moren.springkanban.service.BoardService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,34 +21,40 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping
-    public List<BoardDto> getAll(@AuthenticationPrincipal User user) {
-        return boardService.getAll(user);
+    public ResponseEntity<List<BoardDto>> getAll(@AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(
+                boardService.getAll(user)
+        );
     }
 
     @GetMapping("{id}")
-    public BoardDto get(@PathVariable Long id,
+    public ResponseEntity<BoardDto> get(@PathVariable Long id,
                         @AuthenticationPrincipal User user) {
-        return boardService.get(id, user);
+        return ResponseEntity.ok(
+                boardService.get(id, user)
+        );
     }
 
     @PostMapping
-    public BoardDto save(@RequestBody @Valid BoardDto board,
+    public ResponseEntity<BoardDto> save(@RequestBody @Valid BoardDto board,
                          @AuthenticationPrincipal User user) {
-        return boardService.save(board, user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                boardService.save(board, user)
+        );
     }
 
     @PutMapping("{id}")
-    public HttpStatus update(@RequestBody @Valid BoardDto board,
+    public ResponseEntity<Void> update(@RequestBody @Valid BoardDto board,
                              @PathVariable Long id,
                              @AuthenticationPrincipal User user) {
         boardService.update(board, id, user);
-        return HttpStatus.OK;
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
-    public HttpStatus delete(@PathVariable Long id,
+    public ResponseEntity<Void> delete(@PathVariable Long id,
                              @AuthenticationPrincipal User user) {
         boardService.delete(id, user);
-        return HttpStatus.OK;
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
