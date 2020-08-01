@@ -21,6 +21,6 @@ public class Column {
     @ManyToOne
     private Board board;
 
-    @OneToMany(mappedBy = "column")
+    @OneToMany(mappedBy = "column", cascade = {CascadeType.REMOVE, CascadeType.REFRESH})
     private List<Card> cards;
 }

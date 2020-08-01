@@ -12,7 +12,6 @@ public class JwtUtil {
 
     @Value("${jwt.secret}")
     private String secret;
-    private Long expired;
 
     public String generateToken(Authentication authentication) {
         User principal = (User) authentication.getPrincipal();
@@ -36,9 +35,4 @@ public class JwtUtil {
                     .getBody()
                     .getSubject();
     }
-
-    public boolean resurveToken(String token) {
-        return false;
-    }
-
 }

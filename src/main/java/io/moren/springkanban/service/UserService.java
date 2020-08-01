@@ -1,6 +1,7 @@
 package io.moren.springkanban.service;
 
 import io.moren.springkanban.dto.UserDto;
+import io.moren.springkanban.exception.AuthException;
 import io.moren.springkanban.model.Role;
 import io.moren.springkanban.model.User;
 import io.moren.springkanban.repository.RoleRepository;
@@ -25,7 +26,7 @@ public class UserService {
 
         if (userRepository.findByUsername(userDto.getUsername()).isPresent()
                 || userDto.getUsername() == null) {
-            return;
+            throw new AuthException();
         }
 
         Role roleUser = roleRepository.findByName("ROLE_USER").get();
