@@ -15,7 +15,4 @@ public class CardDto {
 
     @NotNull
     private String name;
-
-    @NotNull
-    private Long columnId;
 }

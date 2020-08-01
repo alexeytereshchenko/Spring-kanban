@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 public class TokenDto {
 
     private String username;
-    private String authorisation;
+    private String access_token;
     private String type;
 }

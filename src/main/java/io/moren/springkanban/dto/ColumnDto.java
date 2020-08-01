@@ -15,7 +15,4 @@ public class ColumnDto {
 
     @NotNull
     private Long boardId;
-
-    @NotNull
-    private String name;
 }
