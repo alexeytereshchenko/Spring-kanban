@@ -1,6 +1,5 @@
 package io.moren.springkanban.exception;
 
-import javassist.NotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,10 +32,24 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, apiError, headers, httpStatus, request);
     }
 
-    @ExceptionHandler(NotFoundException.class)
+    @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<Object> notFoundHandler(Exception ex) {
 
         HttpStatus httpStatus = HttpStatus.NOT_FOUND;
+
+        ApiError apiError = new ApiError(
+                httpStatus,
+                httpStatus.value(),
+                getCurrentLocalDateTimeStamp()
+        );
+
+        return new ResponseEntity<>(apiError, httpStatus);
+    }
+
+    @ExceptionHandler(AuthException.class)
+    public ResponseEntity<Object> authHandler(Exception ex) {
+
+        HttpStatus httpStatus = HttpStatus.UNAUTHORIZED;
 
         ApiError apiError = new ApiError(
                 httpStatus,

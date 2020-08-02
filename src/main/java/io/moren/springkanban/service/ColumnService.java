@@ -1,15 +1,13 @@
 package io.moren.springkanban.service;
 
 import io.moren.springkanban.dto.ColumnDto;
-import io.moren.springkanban.model.Board;
+import io.moren.springkanban.exception.ResourceNotFoundException;
 import io.moren.springkanban.model.Column;
-import io.moren.springkanban.model.User;
 import io.moren.springkanban.repository.BoardRepository;
 import io.moren.springkanban.repository.ColumnRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,13 +19,12 @@ public class ColumnService {
     private final BoardRepository boardRepository;
 
     public List<ColumnDto> getAll(Long boardId) {
-        return boardRepository.findById(boardId).get()
+        return boardRepository.findById(boardId).orElseThrow(ResourceNotFoundException::new)
                 .getColumns()
                 .stream()
                 .map(column -> {
                     return new ColumnDto(
                             column.getId(),
-                            boardId,
                             column.getName());
                 })
                 .collect(Collectors.toList());
@@ -35,22 +32,21 @@ public class ColumnService {
 
     public ColumnDto get(Long id) {
 
-        Column column =  columnRepository.findById(id).get();
+        Column column =  columnRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
 
         ColumnDto columnDto = new ColumnDto();
-        columnDto.setBoardId(column.getBoard().getId());
         columnDto.setId(column.getId());
         columnDto.setName(column.getName());
 
         return columnDto;
     }
 
-    public ColumnDto save(ColumnDto columnDto) {
+    public ColumnDto save(ColumnDto columnDto, Long boardId) {
 
         Column column = new Column();
         column.setName(columnDto.getName());
         column.setBoard(
-                boardRepository.findById(columnDto.getBoardId()).get()
+                boardRepository.findById(boardId).orElseThrow(ResourceNotFoundException::new)
         );
 
         columnRepository.save(column);
@@ -59,13 +55,13 @@ public class ColumnService {
     }
 
     public void update(ColumnDto columnDto, Long id) {
-        columnRepository.findById(id).ifPresent(column -> {
-            column.setName(columnDto.getName());
-            columnRepository.save(column);
-        });
+        Column column = columnRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        column.setName(columnDto.getName());
+        columnRepository.save(column);
     }
 
     public void delete(Long id) {
-        columnRepository.deleteById(id);
+        Column column = columnRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        columnRepository.delete(column);
     }
 }

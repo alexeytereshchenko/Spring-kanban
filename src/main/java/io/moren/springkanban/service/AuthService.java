@@ -37,7 +37,7 @@ public class AuthService {
         TokenDto tokenDto = new TokenDto();
         tokenDto.setUsername(loginDto.getUsername());
         tokenDto.setType(JwtProperties.PREFIX);
-        tokenDto.setAuthorisation(
+        tokenDto.setAccess_token(
                 jwtUtil.generateToken(authentication)
         );
 

@@ -1,6 +1,7 @@
 package io.moren.springkanban.service;
 
 import io.moren.springkanban.dto.BoardDto;
+import io.moren.springkanban.exception.ResourceNotFoundException;
 import io.moren.springkanban.model.Board;
 import io.moren.springkanban.model.User;
 import io.moren.springkanban.repository.BoardRepository;
@@ -25,8 +26,8 @@ public class BoardService {
                 .collect(Collectors.toList());
     }
 
-    public BoardDto get(Long id, User user) {
-        Board board = boardRepository.findByIdAndUser(id, user).get();
+    public BoardDto get(Long id) {
+        Board board = boardRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         return new BoardDto(board.getId(), board.getName());
     }
 
@@ -40,14 +41,15 @@ public class BoardService {
         return boardDto;
     }
 
-    public void update(BoardDto board, Long id, User user) {
-        boardRepository.findByIdAndUser(id, user).ifPresent(oldBoard -> {
-            oldBoard.setName(board.getName());
-            boardRepository.save(oldBoard);
-        });
+    public void update(BoardDto boardDto, Long id) {
+        Board board = boardRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        board.setName(boardDto.getName());
+
+        boardRepository.save(board);
     }
 
-    public void delete(Long id, User user) {
-        boardRepository.deleteByIdAndUser(id, user);
+    public void delete(Long id) {
+        Board board = boardRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        boardRepository.delete(board);
     }
 }

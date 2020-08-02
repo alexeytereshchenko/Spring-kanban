@@ -1,12 +1,10 @@
 package io.moren.springkanban.controller;
 
 import io.moren.springkanban.dto.ColumnDto;
-import io.moren.springkanban.model.User;
 import io.moren.springkanban.service.ColumnService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,8 +18,7 @@ public class ColumnController {
     private final ColumnService columnService;
 
     @GetMapping
-    public ResponseEntity<List<ColumnDto>> getAll(@PathVariable Long boardId,
-                                                  @AuthenticationPrincipal User user) {
+    public ResponseEntity<List<ColumnDto>> getAll(@PathVariable Long boardId) {
         return ResponseEntity.ok(
                 columnService.getAll(boardId)
         );
@@ -35,9 +32,10 @@ public class ColumnController {
     }
 
     @PostMapping
-    public ResponseEntity<ColumnDto> save(@RequestBody @Valid ColumnDto columnDto) {
+    public ResponseEntity<ColumnDto> save(@RequestBody @Valid ColumnDto columnDto,
+                                          @PathVariable Long boardId) {
         return ResponseEntity.status(HttpStatus.CREATED).body(
-                columnService.save(columnDto)
+                columnService.save(columnDto, boardId)
         );
     }
 

@@ -18,8 +18,8 @@ import java.util.Collections;
 @AllArgsConstructor
 public class UserService {
 
-    private RoleRepository roleRepository;
-    private UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
     public void save(UserDto userDto) {

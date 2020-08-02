@@ -2,6 +2,7 @@ package io.moren.springkanban.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.moren.springkanban.exception.AuthException;
 import io.moren.springkanban.model.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
@@ -24,15 +25,18 @@ public class JwtUtil {
     }
 
     public String getUsername(String token) {
-
-            return Jwts
-                    .parser()
-                    .setSigningKey(secret)
-                    .parseClaimsJws(
-                            // delete 'Bearer ' from token
-                            token.substring(JwtProperties.PREFIX.length())
-                    )
-                    .getBody()
-                    .getSubject();
+       try {
+           return Jwts
+                   .parser()
+                   .setSigningKey(secret)
+                   .parseClaimsJws(
+                           // delete 'Bearer ' from token
+                           token.substring(JwtProperties.PREFIX.length())
+                   )
+                   .getBody()
+                   .getSubject();
+       } catch (Exception e) {
+           throw new AuthException();
+       }
     }
 }

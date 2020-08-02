@@ -8,5 +8,4 @@ import java.util.Optional;
 
 @Repository
 public interface ColumnRepository extends JpaRepository<Column, Long> {
-    Optional<Column> findByName(String name);
 }

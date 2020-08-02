@@ -1,7 +1,6 @@
 package io.moren.springkanban.controller;
 
 import io.moren.springkanban.dto.BoardDto;
-import io.moren.springkanban.model.Board;
 import io.moren.springkanban.model.User;
 import io.moren.springkanban.service.BoardService;
 import lombok.AllArgsConstructor;
@@ -28,10 +27,9 @@ public class BoardController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<BoardDto> get(@PathVariable Long id,
-                        @AuthenticationPrincipal User user) {
+    public ResponseEntity<BoardDto> get(@PathVariable Long id) {
         return ResponseEntity.ok(
-                boardService.get(id, user)
+                boardService.get(id)
         );
     }
 
@@ -45,16 +43,14 @@ public class BoardController {
 
     @PutMapping("{id}")
     public ResponseEntity<Void> update(@RequestBody @Valid BoardDto board,
-                             @PathVariable Long id,
-                             @AuthenticationPrincipal User user) {
-        boardService.update(board, id, user);
+                             @PathVariable Long id) {
+        boardService.update(board, id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id,
-                             @AuthenticationPrincipal User user) {
-        boardService.delete(id, user);
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        boardService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

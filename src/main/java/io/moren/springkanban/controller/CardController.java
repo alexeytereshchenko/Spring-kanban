@@ -1,12 +1,10 @@
 package io.moren.springkanban.controller;
 
 import io.moren.springkanban.dto.CardDto;
-import io.moren.springkanban.model.User;
 import io.moren.springkanban.service.CardService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,10 +18,9 @@ public class CardController {
     private final CardService cardService;
 
     @GetMapping
-    public ResponseEntity<List<CardDto>> getAll(@AuthenticationPrincipal User user,
-                                                @PathVariable Long columnId) {
+    public ResponseEntity<List<CardDto>> getAll(@PathVariable Long columnId) {
         return ResponseEntity
-                .ok(cardService.getAll(columnId, user));
+                .ok(cardService.getAll(columnId));
     }
 
     @GetMapping("{id}")
@@ -33,16 +30,18 @@ public class CardController {
     }
 
     @PostMapping
-    public ResponseEntity<CardDto> save(@RequestBody @Valid CardDto cardDto) {
+    public ResponseEntity<CardDto> save(@RequestBody @Valid CardDto cardDto,
+                                        @PathVariable Long columnId) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(cardService.create(cardDto));
+                .body(cardService.create(cardDto, columnId));
     }
 
     @PutMapping("{id}")
     public ResponseEntity<Void> update(@PathVariable Long id,
-                                       @RequestBody @Valid CardDto cardDto) {
-        cardService.update(id, cardDto);
+                                       @RequestBody @Valid CardDto cardDto,
+                                       @PathVariable Long columnId) {
+        cardService.update(id, cardDto, columnId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
