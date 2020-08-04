@@ -11,6 +11,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.NoSuchElementException;
 
 @RestControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
@@ -32,8 +33,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, apiError, headers, httpStatus, request);
     }
 
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<Object> notFoundHandler(Exception ex) {
+    @ExceptionHandler({ResourceNotFoundException.class, NoSuchElementException.class})
+    public ResponseEntity<Object> notFoundHandler() {
 
         HttpStatus httpStatus = HttpStatus.NOT_FOUND;
 
@@ -47,7 +48,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(AuthException.class)
-    public ResponseEntity<Object> authHandler(Exception ex) {
+    public ResponseEntity<Object> authHandler() {
 
         HttpStatus httpStatus = HttpStatus.UNAUTHORIZED;
 
