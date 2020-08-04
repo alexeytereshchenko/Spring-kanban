@@ -33,19 +33,19 @@ Login into an Account
 + **Data constraints** : 
 
 
-    {
-        "username": "[unicode 255 chars max]",
-        "password": "[unicode 255 chars max]"
-    }
+        {
+            "username": "[unicode 255 chars max]",
+            "password": "[unicode 255 chars max]"
+        }
 
 
 + **Data example** All fields must be sent
 
 
-    {
-        "username": "admin",
-        "password": "admin"
-    }    
+        {
+            "username": "admin",
+            "password": "admin"
+        }    
 
 
 + **Successful response** :
@@ -55,14 +55,15 @@ Login into an Account
     + **Code** : `201 CREATED`
     
     + **Content example** :
-    
+   
         
-        {
-            "username": "alex",
-            "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGV4In0.kiwWuia3pvp11_u8ob3Nf5myJ8cxonSpPQXgBMb-P3I",
-            "type": "Bearer "
-        }
-
+            {
+                "username": "alex",
+                "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGV4In0.kiwWuia3pvp11_u8ob3Nf5myJ8cxonSpPQXgBMb-P3I",
+                "type": "Bearer "
+            }
+        
+            
 + **Error response** :
 
     + **Condition** : If 'username' and 'password' combination is wrong.
@@ -81,19 +82,19 @@ Create an Account
 + **Data constraints** : 
 
 
-    {
-        "username": "[unicode 255 chars max]",
-        "password": "[unicode 255 chars max]"
-    }
+        {
+            "username": "[unicode 255 chars max]",
+            "password": "[unicode 255 chars max]"
+        }
 
 
 + **Data example** All fields must be sent
 
 
-    {
-        "username": "admin",
-        "password": "admin"
-    }    
+        {
+            "username": "admin",
+            "password": "admin"
+        }    
 
 
 + **Successful response** :
@@ -105,11 +106,12 @@ Create an Account
     + **Content example** :
     
         
-        {
-            "username": "alex",
-            "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGV4In0.kiwWuia3pvp11_u8ob3Nf5myJ8cxonSpPQXgBMb-P3I",
-            "type": "Bearer "
-        }
+            {
+                "username": "alex",
+                "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGV4In0.kiwWuia3pvp11_u8ob3Nf5myJ8cxonSpPQXgBMb-P3I",
+                "type": "Bearer "
+            }
+
 
 + **Error response** :
 
@@ -121,7 +123,7 @@ Create an Account
 
 ## Boards:
 
-##### Get all boards
+### Get all boards
 
 + **URL** : `/boards`
 
@@ -136,22 +138,22 @@ Create an Account
     + **Content example** :
     
         
-        [
-            {
-                "id": 55,
-                "name": "board"
-            },
-            {
-                "id": 56,
-                "name": "board"
-            },
-            {
-                "id": 57,
-                "name": "board"
-            }
-        ]
+            [
+                {
+                    "id": 55,
+                    "name": "board"
+                },
+                {
+                    "id": 56,
+                    "name": "board"
+                },
+                {
+                    "id": 57,
+                    "name": "board"
+                }
+            ]
 
-##### Get 1 board
+### Get 1 board
 
 + **URL** : `/boards/:pk/`
 
@@ -168,10 +170,11 @@ Create an Account
     + **Content example** :
 
 
-         {
-           "id": 55,
-           "name": "board"
-         }
+             {
+               "id": 55,
+               "name": "board"
+             }
+
 
 + **Error response** :
 
@@ -182,14 +185,14 @@ Create an Account
     + **Content** :
     
     
-        {
-            "status": "NOT_FOUND",
-            "code": 404,
-            "time": "2020-08-04 11:14:22"
-        }
+            {
+                "status": "NOT_FOUND",
+                "code": 404,
+                "time": "2020-08-04 11:14:22"
+            }
 
 
-##### Create a board
+### Create a board
 
 + **URL** : `/boards`
 
@@ -198,17 +201,17 @@ Create an Account
 + **Body** :
 
 
-    {
-        "name": "[unicode 255 chars max]"
-    }
+        {
+            "name": "[unicode 255 chars max]"
+        }
 
 
 + **Body Example** :
 
 
-    {
-        "name": "board-1"
-    }
+        {
+            "name": "board-1"
+        }
 
 
 + **Successful response** :
@@ -220,10 +223,10 @@ Create an Account
     + **Content example** :
 
 
-         {
-           "id": 55,
-           "name": "board-1"
-         }
+             {
+               "id": 55,
+               "name": "board-1"
+             }
 
 
 + **Error response** :
@@ -235,14 +238,14 @@ Create an Account
     + **Content** :
     
     
-        {
-            "status": "BAD_REQUEST",
-            "code": 400,
-            "time": "2020-08-04 11:20:05"
-        }
+            {
+                "status": "BAD_REQUEST",
+                "code": 400,
+                "time": "2020-08-04 11:20:05"
+            }
 
 
-##### Update a board
+### Update a board
 
 + **URL** : `/boards/:pk`
 
@@ -253,17 +256,17 @@ Create an Account
 + **Content** :
 
 
-    {
-        "name": "[unicode 255 chars max]"
-    }
+        {
+            "name": "[unicode 255 chars max]"
+        }
 
 
 + **Content Example** :
 
 
-    {
-        "name": "board-2"
-    }
+        {
+            "name": "board-2"
+        }
 
 
 + **Successful response** :
@@ -281,11 +284,11 @@ Create an Account
     + **Content** :
     
     
-        {
-            "status": "BAD_REQUEST",
-            "code": 400,
-            "time": "2020-08-04 11:20:05"
-        }
+            {
+                "status": "BAD_REQUEST",
+                "code": 400,
+                "time": "2020-08-04 11:20:05"
+            }
 
 
 + **Or** :
@@ -297,14 +300,14 @@ Create an Account
     + **Content** :
     
     
-        {
-            "status": "NOT_FOUND",
-            "code": 404,
-            "time": "2020-08-04 11:14:22"
-        }
+            {
+                "status": "NOT_FOUND",
+                "code": 404,
+                "time": "2020-08-04 11:14:22"
+            }
 
 
-##### Delete a board
+### Delete a board
 
 + **URL** : `/boards/:pk`
 
@@ -327,11 +330,11 @@ Create an Account
     + **Content** :
     
     
-        {
-            "status": "NOT_FOUND",
-            "code": 404,
-            "time": "2020-08-04 11:14:22"
-        }
+            {
+                "status": "NOT_FOUND",
+                "code": 404,
+                "time": "2020-08-04 11:14:22"
+            }
 
 
 ## Columns:
