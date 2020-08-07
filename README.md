@@ -18,9 +18,9 @@ This is api for kanban board
 
 * [Boards](#boards) : `{ GET, POST, PUT, DELETE } /boards`
 
-* [Columns](#columns) : `{ GET, POST, PUT, DELETE } /boards/{boardID}/columns`
+* [Columns](#columns) : `{ GET, POST, PUT, DELETE } /boards/:boardId/columns`
 
-* [Cards](#cards) : `{ GET, POST, PUT, DELETE } /boards/{boardID}/columns/{columnId}/cards`
+* [Cards](#cards) : `{ GET, POST, PUT, DELETE } /boards/:boardId/columns/:columnId/cards`
 
 ## Login:
 
@@ -155,9 +155,9 @@ Create an Account
 
 ### Get 1 board
 
-+ **URL** : `/boards/:pk/`
++ **URL** : `/boards/:boardId/`
 
-+ **URL Parameters** : `pk=[integer]` where `pk` is the ID of the board on the server
++ **URL Parameters** : `boardId=[integer]` where `pk` is the ID of the board on the server
 
 + **Method** : `Get`
 
@@ -247,9 +247,9 @@ Create an Account
 
 ### Update a board
 
-+ **URL** : `/boards/:pk`
++ **URL** : `/boards/:boardId`
 
-+ **URL Parameters** : `pk=[integer]` where `pk` is the ID of the board on the server
++ **URL Parameters** : `boardId=[integer]` where `pk` is the ID of the board on the server
 
 + **Method** : `PUT`
 
@@ -309,9 +309,9 @@ Create an Account
 
 ### Delete a board
 
-+ **URL** : `/boards/:pk`
++ **URL** : `/boards/:boardId`
 
-+ **URL Parameters** : `pk=[integer]` where `pk` is the ID of the board on the server
++ **URL Parameters** : `boardId=[integer]` where `pk` is the ID of the board on the server
 
 + **Method** : `DELETE`
 
