@@ -1,10 +1,10 @@
-### Get 1 board
+### Get a board
 
 + **URL** : `/boards/:boardId/`
 
-+ **URL Parameters** : `boardId=[integer]` where `pk` is the ID of the board on the server
++ **URL Parameters** : `boardId=[integer]`
 
-+ **Auth required**: **Yes**
++ **Auth required**: **YES**
 
 + **Method** : `Get`
 
@@ -25,7 +25,7 @@
 
 + **Error response** :
 
-    + **Condition** :  If board not created
+    + **Condition** :  If board not exist
     
     + **Code** : `404 NOT FOUND`
     

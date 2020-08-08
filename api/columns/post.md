@@ -1,14 +1,14 @@
-# Update a board
+# Create a column
 
-+ **URL** : `/boards/:boardId`
++ **URL** : `/boards/:boardId/columns`
 
 + **URL Parameters** : `boardId=[integer]`
 
 + **Auth required**: **YES**
 
-+ **Method** : `PUT`
++ **Method** : `POST`
 
-+ **Content** :
++ **Body** :
 
 
         {
@@ -16,11 +16,11 @@
         }
 
 
-+ **Content Example** :
++ **Body Example** :
 
 
         {
-            "name": "board-2"
+            "name": "tasks"
         }
 
 
@@ -28,11 +28,20 @@
     
     + **Condition** : If everything is OK
     
-    + **Code** : `200 Ok`
+    + **Code** : `201 CREATED`
+    
+    + **Content example** :
+
+
+             {
+               "id": 55,
+               "name": "tasks"
+             }
+
 
 + **Error response** :
 
-    + **Condition** :  If board not valid
+    + **Condition** :  If column not valid
     
     + **Code** : `400 Bad request`
     
@@ -43,20 +52,4 @@
                 "status": "BAD_REQUEST",
                 "code": 400,
                 "time": "2020-08-04 11:20:05"
-            }
-
-
-+ **Or** :
-
-    + **Condition** :  If board not exist
-    
-    + **Code** : `404 NOT FOUND`
-    
-    + **Content** :
-    
-    
-            {
-                "status": "NOT_FOUND",
-                "code": 404,
-                "time": "2020-08-04 11:14:22"
             }

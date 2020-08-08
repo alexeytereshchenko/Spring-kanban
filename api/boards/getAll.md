@@ -2,7 +2,7 @@
 
 + **URL** : `/boards`
 
-+ **Auth required**: **Yes**
++ **Auth required**: **YES**
 
 + **Method** : `Get`
 
@@ -18,14 +18,14 @@
             [
                 {
                     "id": 55,
-                    "name": "board"
+                    "name": "board-1"
                 },
                 {
                     "id": 56,
-                    "name": "board"
+                    "name": "board-2"
                 },
                 {
                     "id": 57,
-                    "name": "board"
+                    "name": "board-3"
                 }
             ]

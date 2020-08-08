@@ -16,6 +16,8 @@ This is api for kanban board
 
 ## Close Endpoints:
 
+#### Boards endpoints
+
 * [Get all boards](/api/boards/getAll.md) : `GET /boards`
 
 * [Get a boards](/api/boards/get.md) : `GET /boards/:boardId`
@@ -26,7 +28,7 @@ This is api for kanban board
 
 * [Delete a boards](/api/boards/delete.md) : `DELETE /boards/:boardId`
 
-#
+#### Columns endpoints
 
 * [Get all columns](/api/columns/getAll.md) : `GET /boards/:boardId/columns`
 
@@ -38,7 +40,7 @@ This is api for kanban board
 
 * [Delete a columns](/api/columns/delete.md) : `DELETE /boards/:boardId/columns/:columnsId`
 
-#
+#### Cards endpoints
 
 * [Get all cards](/api/cards/getAll.md) : `GET /boards/:boardId/columns/:columnId/cards`
 

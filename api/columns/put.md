@@ -1,8 +1,8 @@
-# Update a board
+# Update a column
 
-+ **URL** : `/boards/:boardId`
++ **URL** : `/boards/:boardId/columns/:columnId`
 
-+ **URL Parameters** : `boardId=[integer]`
++ **URL Parameters** : `boardId=[integer]` `columnId=[integer]`
 
 + **Auth required**: **YES**
 
@@ -20,7 +20,7 @@
 
 
         {
-            "name": "board-2"
+            "name": "tasks"
         }
 
 
@@ -32,7 +32,7 @@
 
 + **Error response** :
 
-    + **Condition** :  If board not valid
+    + **Condition** :  If column not valid
     
     + **Code** : `400 Bad request`
     
@@ -48,7 +48,7 @@
 
 + **Or** :
 
-    + **Condition** :  If board not exist
+    + **Condition** :  If column not exist
     
     + **Code** : `404 NOT FOUND`
     

@@ -1,6 +1,8 @@
-# Create a board
+# Create a cards
 
-+ **URL** : `/boards`
++ **URL** : `/boards/:boardId/columns/:columnId/cards`
+
++ **URL Parameters** : `boardId=[integer]` `columnId=[integer]`
 
 + **Auth required**: **YES**
 
@@ -18,7 +20,7 @@
 
 
         {
-            "name": "board-1"
+            "name": "card-1"
         }
 
 
@@ -33,13 +35,13 @@
 
              {
                "id": 55,
-               "name": "board-1"
+               "name": "card-1"
              }
 
 
 + **Error response** :
 
-    + **Condition** :  If board not valid
+    + **Condition** :  If card not valid
     
     + **Code** : `400 Bad request`
     
