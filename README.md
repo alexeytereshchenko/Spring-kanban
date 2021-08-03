@@ -1,12 +1,12 @@
 # Spring-kanban
-This is api for kanban board
+API for kanban board
 
 ## Try it with docker-compose
 
-    docker-compose up
+    sudo docker-compose up
     
     
-    localhost:8080/api
+    localhost:9999/api
 
 ## Open Endpoints:
 
