@@ -12,6 +12,7 @@ Login into an Account
 
 + **Data constraints** :
 
+
         {
             "username": "[unicode 255 chars max]",
             "password": "[unicode 255 chars max]"
@@ -34,6 +35,7 @@ Login into an Account
 
   + **Content example** :
 
+
     {
       "username": "string",
       "type": "string",
@@ -49,6 +51,7 @@ Login into an Account
   + **Code** : `401 UNAUTHORIZED`
 
   + **Content** :
+
 
     {
       "time": 0,

@@ -12,6 +12,7 @@ Get new tokens
 
 + **Data constraints** :
 
+
         {
             "token": "[unicode 255 chars max]"
         }
@@ -23,6 +24,7 @@ Get new tokens
   + **Code** : `200 OK`
 
   + **Content example** :
+
 
     {
       "username": "string",
@@ -39,6 +41,7 @@ Get new tokens
   + **Code** : `401 UNAUTHORIZED`
 
   + **Content** :
+
 
     {
       "time": 0,
