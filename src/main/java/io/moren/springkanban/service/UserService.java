@@ -1,13 +1,11 @@
 package io.moren.springkanban.service;
 
 import io.moren.springkanban.dto.UserDto;
-import io.moren.springkanban.exception.AuthException;
 import io.moren.springkanban.model.Role;
 import io.moren.springkanban.model.User;
 import io.moren.springkanban.repository.RoleRepository;
 import io.moren.springkanban.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,7 +24,7 @@ public class UserService {
 
         if (userRepository.findByUsername(userDto.getUsername()).isPresent()
                 || userDto.getUsername() == null) {
-            throw new AuthException();
+            throw new UsernameNotFoundException("Can't find user: " + userDto.getUsername());
         }
 
         Role roleUser = roleRepository.findByName("ROLE_USER").get();
