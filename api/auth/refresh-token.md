@@ -13,9 +13,9 @@ Get new tokens
 + **Data constraints** :
 
 
-        {
-            "token": "[unicode 255 chars max]"
-        }
+      {
+          "token": "[unicode 255 chars max]"
+      }
 
 + **Successful response** :
 
@@ -26,13 +26,13 @@ Get new tokens
   + **Content example** :
 
 
-    {
-      "username": "string",
-      "type": "string",
-      "access_token": "string",
-      "refresh_token": "string",
-      "expire_time": 0
-    }        
+        {
+            "username": "string",
+            "type": "string",
+            "access_token": "string",
+            "refresh_token": "string",
+            "expire_time": 0
+        }        
 
 + **Error response** :
 
@@ -43,8 +43,8 @@ Get new tokens
   + **Content** :
 
 
-    {
-      "time": 0,
-      "code": 401,
-      "message": "Incorrect refresh token"
-    }
+        {
+           "time": 0,
+           "code": 401,
+           "message": "Incorrect refresh token"
+        }
