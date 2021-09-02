@@ -1,8 +1,8 @@
-# Login:
+# Refresh token:
 
-Login into an Account
+Get new tokens
 
-+ **URL** : `/auth/login`
++ **URL** : `/auth/refresh`
 
 + **Token life** : `30 minutes`
 
@@ -13,24 +13,14 @@ Login into an Account
 + **Data constraints** :
 
         {
-            "username": "[unicode 255 chars max]",
-            "password": "[unicode 255 chars max]"
+            "token": "[unicode 255 chars max]"
         }
-
-
-+ **Data example** All fields must be sent
-
-
-        {
-            "username": "admin",
-            "password": "admin"
-        }    
 
 + **Successful response** :
 
   + **Condition** : If everything is OK
 
-  + **Code** : `201 CREATED`
+  + **Code** : `200 OK`
 
   + **Content example** :
 
@@ -44,7 +34,7 @@ Login into an Account
 
 + **Error response** :
 
-  + **Condition** : If 'username' or 'password' is wrong.
+  + **Condition** : If token is expired.
 
   + **Code** : `401 UNAUTHORIZED`
 
@@ -53,5 +43,5 @@ Login into an Account
     {
       "time": 0,
       "code": 401,
-      "message": "Bad credentials"
+      "message": "Incorrect refresh token"
     }

@@ -6,15 +6,20 @@ https://kanban-backend.pythontop.xyz/api
 ## Try it with docker-compose
 
     sudo docker-compose up
-    
-    
+     
     localhost:9999/api
+
+    localhost:9999/swagger
 
 ## Open Endpoints:
 
 * [Login](/api/auth/login.md)  : `POST /auth/login`
 
 * [Signup](/api/auth/signup.md) : `POST /auth/signup`
+
+* [Refresh Token](/api/auth/refresh-token.md) : `POST /auth/refresh`
+
+* Swagger : `GET /swagger`
 
 ## Close Endpoints:
 
