@@ -58,3 +58,12 @@ https://kanban-backend.pythontop.xyz/api
 * [Update a cards](/api/cards/put.md) : `PUT /boards/:boardId/columns/:columnId/cards/:cardId`
 
 * [Delete a cards](/api/cards/delete.md) : `DELETE /boards/:boardId/columns/:columnId/cards/:cardId`
+
+#### Error response
+
+
+    {
+        "time": [unixtime],
+        "code": [integer],
+            "message": [description of error]
+    }
