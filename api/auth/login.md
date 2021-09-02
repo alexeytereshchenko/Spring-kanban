@@ -36,13 +36,13 @@ Login into an Account
   + **Content example** :
 
 
-    {
-      "username": "string",
-      "type": "string",
-      "access_token": "string",
-      "refresh_token": "string",
-      "expire_time": 0
-    }        
+            {
+              "username": "string",
+              "type": "string",
+              "access_token": "string",
+              "refresh_token": "string",
+              "expire_time": 0
+            }        
 
 + **Error response** :
 
@@ -53,8 +53,8 @@ Login into an Account
   + **Content** :
 
 
-    {
-      "time": 0,
-      "code": 401,
-      "message": "Bad credentials"
-    }
+            {
+              "time": 0,
+              "code": 401,
+              "message": "Bad credentials"
+            }
