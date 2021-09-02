@@ -39,7 +39,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler({
-//            TokenRefreshException.class,
             AccessDeniedException.class,
             AuthenticationException.class
     })

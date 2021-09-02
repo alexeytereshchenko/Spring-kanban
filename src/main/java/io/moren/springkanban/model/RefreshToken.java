@@ -19,7 +19,6 @@ public class RefreshToken {
     private String token;
 
     @OneToOne
-//    @JoinColumn(nullable = false, unique = true)
     private User user;
 
     @Column(nullable = false)
