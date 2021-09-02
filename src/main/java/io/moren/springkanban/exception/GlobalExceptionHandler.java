@@ -41,7 +41,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({
             AccessDeniedException.class,
-            AuthenticationException.class
+            AuthenticationException.class,
+            UserAlreadyExistsException.class
     })
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ResponseEntity<Object> refreshTokenHandler(RuntimeException e) {

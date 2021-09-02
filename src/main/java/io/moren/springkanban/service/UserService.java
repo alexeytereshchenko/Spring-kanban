@@ -1,12 +1,12 @@
 package io.moren.springkanban.service;
 
 import io.moren.springkanban.dto.UserDto;
+import io.moren.springkanban.exception.UserAlreadyExistsException;
 import io.moren.springkanban.model.Role;
 import io.moren.springkanban.model.User;
 import io.moren.springkanban.repository.RoleRepository;
 import io.moren.springkanban.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,9 +22,8 @@ public class UserService {
 
     public void save(UserDto userDto) {
 
-        if (userRepository.findByUsername(userDto.getUsername()).isPresent()
-                || userDto.getUsername() == null) {
-            throw new UsernameNotFoundException("Can't find user: " + userDto.getUsername());
+        if (userRepository.findByUsername(userDto.getUsername()).isPresent()) {
+            throw new UserAlreadyExistsException("User " + userDto.getUsername() + " already exists!");
         }
 
         Role roleUser = roleRepository.findByName("ROLE_USER").get();
