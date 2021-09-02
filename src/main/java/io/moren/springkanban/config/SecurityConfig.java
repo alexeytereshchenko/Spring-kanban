@@ -50,9 +50,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .accessDeniedHandler(restAccessDeniedHandler)
                 .authenticationEntryPoint(restAuthenticationEntryPoint)
                 .and()
-                    .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                    .mvcMatchers("/api/auth/**").permitAll()
+                .mvcMatchers("/api/auth/**").permitAll()
+                .mvcMatchers("/swagger*/**").permitAll()
+                .mvcMatchers("/api-docs*/**").permitAll()
                     .anyRequest().authenticated();
     }
 }

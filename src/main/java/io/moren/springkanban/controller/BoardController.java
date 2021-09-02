@@ -3,6 +3,7 @@ package io.moren.springkanban.controller;
 import io.moren.springkanban.dto.BoardDto;
 import io.moren.springkanban.model.User;
 import io.moren.springkanban.service.BoardService;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping
-    public ResponseEntity<List<BoardDto>> getAll(@AuthenticationPrincipal User user) {
+    public ResponseEntity<List<BoardDto>> getAll(@Parameter(hidden = true) @AuthenticationPrincipal User user) {
         return ResponseEntity.ok(
                 boardService.getAll(user)
         );

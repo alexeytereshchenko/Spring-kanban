@@ -8,12 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.Instant;
 import java.util.NoSuchElementException;
 
 @Slf4j
@@ -31,6 +31,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<ApiErrorResponse> handleInternalServer(Exception e) {
         log.error("Internal server error: {}", e.getMessage());
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -42,12 +43,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             AccessDeniedException.class,
             AuthenticationException.class
     })
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ResponseEntity<Object> refreshTokenHandler(RuntimeException e) {
         HttpStatus status = HttpStatus.UNAUTHORIZED;
-        ApiErrorResponse error = new ApiErrorResponse();
-        error.setTime(generateTime());
-        error.setCode(status.value());
-        error.setMessage(e.getMessage());
+        ApiErrorResponse error = createApiError(status, e.getMessage());
         return new ResponseEntity<>(error, status);
     }
 
@@ -55,6 +54,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             ResourceNotFoundException.class,
             NoSuchElementException.class
     })
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<ApiErrorResponse> handleNotFound() {
         HttpStatus status = HttpStatus.NOT_FOUND;
         ApiErrorResponse error = createApiError(status);
@@ -64,22 +64,23 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     private ApiErrorResponse createApiError(HttpStatus status) {
         ApiErrorResponse error = new ApiErrorResponse();
         error.setCode(status.value());
-        error.setTime(generateTime());
+        error.setTime(Instant.now().getEpochSecond());
         error.setMessage(status.getReasonPhrase());
         return error;
     }
 
-    private String generateTime() {
-        return LocalDateTime.now()
-                .format(
-                        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-                );
+    private ApiErrorResponse createApiError(HttpStatus status, String message) {
+        ApiErrorResponse error = new ApiErrorResponse();
+        error.setCode(status.value());
+        error.setTime(Instant.now().getEpochSecond());
+        error.setMessage(message);
+        return error;
     }
 }
 
 @Data
 class ApiErrorResponse {
-    private String time;
+    private Long time;
     private Integer code;
     private String message;
 }
