@@ -65,5 +65,5 @@ https://kanban-backend.pythontop.xyz/api
     {
         "time": [unixtime],
         "code": [integer],
-            "message": [description of error]
+        "message": [description of error]
     }
