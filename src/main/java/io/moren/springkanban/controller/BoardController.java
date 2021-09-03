@@ -38,7 +38,7 @@ public class BoardController {
 
     @PostMapping
     public ResponseEntity<BoardDto> save(@RequestBody @Valid BoardDto board,
-                         @AuthenticationPrincipal User user) {
+                                         @Parameter(hidden = true) @AuthenticationPrincipal User user) {
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 boardService.save(board, user)
         );
