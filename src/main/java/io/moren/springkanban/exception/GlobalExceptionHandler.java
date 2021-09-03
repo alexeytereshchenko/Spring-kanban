@@ -45,7 +45,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             UserAlreadyExistsException.class
     })
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    public ResponseEntity<Object> refreshTokenHandler(RuntimeException e) {
+    public ResponseEntity<ApiErrorResponse> refreshTokenHandler(RuntimeException e) {
         HttpStatus status = HttpStatus.UNAUTHORIZED;
         ApiErrorResponse error = createApiError(status, e.getMessage());
         return new ResponseEntity<>(error, status);
