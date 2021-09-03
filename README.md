@@ -1,7 +1,7 @@
 # Spring-kanban
 API for kanban board
 
-https://kanban-backend.pythontop.xyz/api
+https://kanban-backend.pythontop.xyz/swagger
 
 ## Try it with docker-compose
 
