@@ -2,6 +2,7 @@ package io.moren.springkanban.controller;
 
 import io.moren.springkanban.dto.CardDto;
 import io.moren.springkanban.service.CardService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/boards/{boardId}/columns/{columnId}/cards")
+@SecurityRequirement(name = "bearerAuth")
 public class CardController {
 
     private final CardService cardService;

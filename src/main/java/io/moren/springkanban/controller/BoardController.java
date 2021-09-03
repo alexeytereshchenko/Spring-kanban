@@ -4,6 +4,7 @@ import io.moren.springkanban.dto.BoardDto;
 import io.moren.springkanban.model.User;
 import io.moren.springkanban.service.BoardService;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/boards")
 @AllArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class BoardController {
 
     private final BoardService boardService;

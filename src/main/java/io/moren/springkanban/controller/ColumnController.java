@@ -2,6 +2,7 @@ package io.moren.springkanban.controller;
 
 import io.moren.springkanban.dto.ColumnDto;
 import io.moren.springkanban.service.ColumnService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/boards/{boardId}/columns")
+@SecurityRequirement(name = "bearerAuth")
 public class ColumnController {
 
     private final ColumnService columnService;
