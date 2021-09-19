@@ -7,6 +7,7 @@ services:
     - "9999:8080"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/kanban
+      SWAGGER_SERVER_URL: http://localhost:9999
     depends_on:
       - db
     restart: always
