@@ -29,30 +29,33 @@ public class BoardController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<BoardDto> get(@PathVariable Long id) {
+    public ResponseEntity<BoardDto> get(@AuthenticationPrincipal User user,
+                                        @PathVariable Long id) {
         return ResponseEntity.ok(
-                boardService.get(id)
+                boardService.get(user, id)
         );
     }
 
     @PostMapping
-    public ResponseEntity<BoardDto> save(@RequestBody @Valid BoardDto board,
-                                         @AuthenticationPrincipal User user) {
+    public ResponseEntity<BoardDto> save(@AuthenticationPrincipal User user,
+                                         @RequestBody @Valid BoardDto board) {
         return ResponseEntity.status(HttpStatus.CREATED).body(
-                boardService.save(board, user)
+                boardService.save(user, board)
         );
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Void> update(@RequestBody @Valid BoardDto board,
-                             @PathVariable Long id) {
-        boardService.update(board, id);
+    public ResponseEntity<Void> update(@AuthenticationPrincipal User user,
+                                       @RequestBody @Valid BoardDto board,
+                                       @PathVariable Long id) {
+        boardService.update(user, board, id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        boardService.delete(id);
+    public ResponseEntity<Void> delete(@AuthenticationPrincipal User user,
+                                       @PathVariable Long id) {
+        boardService.delete(user, id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

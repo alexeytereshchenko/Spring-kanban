@@ -55,6 +55,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/api/auth/**").permitAll()
                 .mvcMatchers("/swagger*/**").permitAll()
                 .mvcMatchers("/api-docs*/**").permitAll()
-                    .anyRequest().authenticated();
+                .anyRequest().authenticated();
     }
 }

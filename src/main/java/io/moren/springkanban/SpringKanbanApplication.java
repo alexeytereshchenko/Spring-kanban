@@ -18,7 +18,7 @@ public class SpringKanbanApplication implements ApplicationRunner {
     }
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(ApplicationArguments args) {
         if (roleRepository.findAll().isEmpty()) {
             Role user = new Role();
             user.setName("ROLE_USER");

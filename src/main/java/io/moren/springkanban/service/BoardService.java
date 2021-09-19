@@ -8,6 +8,7 @@ import io.moren.springkanban.repository.BoardRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,30 +27,29 @@ public class BoardService {
                 .collect(Collectors.toList());
     }
 
-    public BoardDto get(Long id) {
-        Board board = boardRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+    public BoardDto get(User user, Long id) {
+        Board board = boardRepository.findByIdAndUser(id, user).orElseThrow(ResourceNotFoundException::new);
         return new BoardDto(board.getId(), board.getName());
     }
 
-    public BoardDto save(BoardDto boardDto, User user) {
+    public BoardDto save(User user, BoardDto boardDto) {
         Board board = new Board();
         board.setName(boardDto.getName());
         board.setUser(user);
-
         boardRepository.save(board);
+
         boardDto.setId(board.getId());
         return boardDto;
     }
 
-    public void update(BoardDto boardDto, Long id) {
-        Board board = boardRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+    public void update(User user, BoardDto boardDto, Long id) {
+        Board board = boardRepository.findByIdAndUser(id, user).orElseThrow(ResourceNotFoundException::new);
         board.setName(boardDto.getName());
-
         boardRepository.save(board);
     }
 
-    public void delete(Long id) {
-        Board board = boardRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
-        boardRepository.delete(board);
+    @Transactional
+    public void delete(User user, Long id) {
+        boardRepository.deleteByIdAndUser(id, user);
     }
 }
